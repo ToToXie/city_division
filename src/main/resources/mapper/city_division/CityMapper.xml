@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="wd.city_division.mapper.CityMapper">
+    <resultMap id="oneResultMap" type="wd.city_division.entity.City">
+        <id property="id" column="id"  />
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="parentCode" column="parent_id"/>
+        <result property="level" column="level"/>
+        <collection property="childs" column="id" javaType="ArrayList"
+                    ofType="wd.city_division.entity.City" select="getChilds" />
+    </resultMap>
+
+    <select id="listChildsById" resultMap="oneResultMap">
+        select * from city
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+        </where>
+    </select>
+    <select id="getChilds" resultMap="oneResultMap">
+        select * from city
+        <where>
+            <!--<if test="level != null">
+              level = #{level}+ 1
+            </if>-->
+            <if test="id != null">
+                and parent_id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAll" resultMap="oneResultMap">
+        select * from city
+    </select>
+
+    <cache/>
+</mapper>
