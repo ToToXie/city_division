@@ -53,9 +53,12 @@ public class CityController {
     @GetMapping("/code")
     @ApiOperation("根据编码查询下级地区")
     @WebLog(description = "根据编码查询下级地区")
-    public String getByCode(@RequestParam(defaultValue = "-1") String code){
+    public ApiResponse getByCode(@RequestParam(defaultValue = "-1") String code){
         List<City> cities = cityService.listByCode(code);
-        return cities.toString();
+        return ApiResponse.<List<City>>builder().code(200)
+                .message("操作成功")
+                .data(cities)
+                .build();
     }
     @GetMapping("/name")
     @ApiOperation("根据关键字(省、市、县)模糊查询下级地区")

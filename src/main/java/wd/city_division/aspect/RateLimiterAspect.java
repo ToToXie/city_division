@@ -46,7 +46,7 @@ public class RateLimiterAspect {
                 RATE_LIMITER_CACHE.put(method.getName(), com.google.common.util.concurrent.RateLimiter.create(qps));
             }
 
-            log.debug("【{}】的QPS设置为: {}", method.getName(), RATE_LIMITER_CACHE.get(method.getName()).getRate());
+            log.info("【{}】的QPS设置为: {}", method.getName(), RATE_LIMITER_CACHE.get(method.getName()).getRate());
             // 尝试获取令牌
             if (RATE_LIMITER_CACHE.get(method.getName()) != null && !RATE_LIMITER_CACHE.get(method.getName()).tryAcquire(myRateLimiter.timeout(), myRateLimiter.timeUnit())) {
                 throw new RuntimeException("手速太快了，慢点儿吧~");

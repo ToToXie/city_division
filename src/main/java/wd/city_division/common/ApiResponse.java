@@ -37,4 +37,11 @@ public class ApiResponse<T> implements Serializable {
      */
     @ApiModelProperty(value = "通用返回数据", required = true)
     private T data;
+
+    public ApiResponse<T> ok(){
+        this.code = 200;
+        this.message = "调用成功";
+        return this;
+    }
+
 }
