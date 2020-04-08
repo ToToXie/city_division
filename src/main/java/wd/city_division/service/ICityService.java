@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public interface ICityService extends IService<City> {
-    List<City> init() throws Exception;
+    List<City> init();
     List<City> test(String code);
     List<City> listByCode(String code);
     List<City> listByName(String name);

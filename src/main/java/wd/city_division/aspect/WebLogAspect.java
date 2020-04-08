@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import wd.city_division.aop.WebLog;
+import wd.city_division.annotation.WebLog;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -33,7 +33,7 @@ public class WebLogAspect {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     /** 以自定义 @WebLog 注解为切点 */
-    @Pointcut("@annotation(wd.city_division.aop.WebLog)")
+    @Pointcut("@annotation(wd.city_division.annotation.WebLog)")
     public void webLog() {}
 
     /**

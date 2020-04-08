@@ -1,4 +1,4 @@
-package wd.city_division.aop;
+package wd.city_division.annotation;
 
 import org.springframework.core.annotation.Order;
 

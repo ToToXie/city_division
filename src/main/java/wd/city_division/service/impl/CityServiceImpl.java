@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 import wd.city_division.entity.City;
+import wd.city_division.exception.FebsException;
 import wd.city_division.mapper.CityMapper;
 import wd.city_division.service.ICityService;
 
@@ -30,9 +32,9 @@ public class CityServiceImpl extends ServiceImpl<CityMapper, City> implements IC
     private RestTemplate restTemplate;
     public static final String url = "https://mxnzp.com/api/address/list?app_id=pnjgrriit6wghnlo&app_secret=YXBoenBlWnZmanhLWTRxenNCL1p3Zz09";
     @Override
-    public List<City> init() throws Exception {
+    public List<City> init() {
         if(count() > 0){
-            throw new Exception("数据已经导入！ 无需再点击");
+            throw new FebsException("数据已经导入！ 无需再点击");
         }
         restTemplate = new RestTemplate();
         JSONObject forObject = restTemplate.getForObject(url, JSONObject.class);
@@ -71,7 +73,7 @@ public class CityServiceImpl extends ServiceImpl<CityMapper, City> implements IC
 
         City two = cityMapper.selectOne(ew);
         log.warn("+++++++++++++++++++");
-//        Assert.isTrue(one == two,"他们不相等了");
+        Assert.isTrue(one == two,"他们不相等了");
 
         return null;
     }

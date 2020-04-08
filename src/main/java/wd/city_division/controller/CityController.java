@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import wd.city_division.aop.MyRateLimiter;
-import wd.city_division.aop.WebLog;
-import wd.city_division.common.ApiResponse;
+import wd.city_division.annotation.ControllerEndpoint;
+import wd.city_division.annotation.MyRateLimiter;
+import wd.city_division.annotation.WebLog;
+import wd.city_division.common.FebsResponse;
 import wd.city_division.entity.City;
 import wd.city_division.service.ICityService;
 
@@ -35,44 +36,34 @@ public class CityController {
     @GetMapping("/init")
     @ApiOperation("数据准备,插入数据")
     @WebLog(description = "数据准备,插入数据")
-    @MyRateLimiter(value = 1,timeout = 300)
-    public ApiResponse initForData(){
+    @MyRateLimiter(value = 1,timeout = 100)
+    public FebsResponse initForData(){
         log.info("数据准备,插入数据");
-        List<City> init = null;
-        try {
-            init = cityService.init();
-            boolean b = cityService.saveBatch(init,init.size());
-        } catch (Exception e) {
-            log.info("不必多次插入" );
-        }
-        return ApiResponse.<String>builder().code(200)
-                .message("操作成功")
-                .data("数据插入完成")
-                .build();
+        List<City> init = cityService.init();
+        cityService.saveBatch(init,init.size());
+        return new FebsResponse().success().message("数据插入完成");
     }
     @GetMapping("/code")
     @ApiOperation("根据编码查询下级地区")
     @WebLog(description = "根据编码查询下级地区")
-    public ApiResponse getByCode(@RequestParam(defaultValue = "-1") String code){
+    public FebsResponse getByCode(@RequestParam(defaultValue = "-1") String code){
         List<City> cities = cityService.listByCode(code);
-        return ApiResponse.<List<City>>builder().code(200)
-                .message("操作成功")
-                .data(cities)
-                .build();
+        return new FebsResponse().success().message("查询完成").data(cities);
     }
     @GetMapping("/name")
     @ApiOperation("根据关键字(省、市、县)模糊查询下级地区")
     @WebLog(description = "根据关键字(省、市、县)模糊查询下级地区")
-    public String getByName(@RequestParam(defaultValue = "全国") String name){
+    public FebsResponse getByName(@RequestParam(defaultValue = "全国") String name){
         List<City> cities = cityService.listByName(name);
-        return cities.toString();
+        return new FebsResponse().success().message("查询完成").data(cities);
     }
     @GetMapping("/test")
     @ApiOperation("测试缓存")
     @WebLog(description = "测试缓存")
-    public String test(@RequestParam(defaultValue = "-1") String code){
-        List<City> cities = cityService.test(code);
-        return " --- ";
+    @ControllerEndpoint(operation = "测试缓存",exceptionMessage = "缓存没有生效！！")
+    public FebsResponse test(@RequestParam(defaultValue = "-1") String code){
+        cityService.test(code);
+        return new FebsResponse().success().message("缓存生效了！！");
     }
 
 

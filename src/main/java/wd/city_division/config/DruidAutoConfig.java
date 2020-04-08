@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import wd.city_division.propertise.DruidProperties;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 @ConditionalOnClass(DruidDataSource.class)
 @ConditionalOnProperty(prefix = "druid", name = "url")
 @AutoConfigureBefore(DataSourceAutoConfiguration.class)
-public class DruidAutoConfiguration {
+public class DruidAutoConfig {
 
 	@Autowired
 	private DruidProperties properties;
