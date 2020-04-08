@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +24,7 @@ import java.util.List;
  * @since 2020-04-02
  */
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="City对象", description="三级行政划分数据")
@@ -44,9 +46,11 @@ public class City implements Serializable {
     private Integer level;
     @Transient
     @TableField(exist = false)
+//    @JsonIgnore
     private List<City> pchilds;
     @Transient
     @TableField(exist = false)
+//    @JsonIgnore
     private List<City> cchilds;
     @Transient
     @TableField(exist = false)
