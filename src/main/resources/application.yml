@@ -24,3 +24,6 @@
 spring:
   profiles:
     active: dev
+thymeleaf:
+  cache: false
+  mode: HTML

@@ -28,11 +28,12 @@ mybatis-plus:
       id-type: auto
       db-type: mysql
     banner: false
-#mybatis:
-#  configuration:
-#    cache-enabled: true
+  type-aliases-package: wd.city_division.entity
+  #mybatis:
+  #  configuration:
+  #    cache-enabled: true
 
-## 配置多环境日志输出格式
+  ## 配置多环境日志输出格式
   ## 配置包下日志输出格式,可在日志配置文件中直接引用
 #logging:
 #  level:

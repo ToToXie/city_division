@@ -24,7 +24,7 @@ import java.util.List;
  * @since 2020-04-02
  */
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="City对象", description="三级行政划分数据")

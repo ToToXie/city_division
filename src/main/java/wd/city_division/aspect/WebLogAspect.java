@@ -1,7 +1,8 @@
 package wd.city_division.aspect;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Stopwatch;
-import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,7 +64,8 @@ public class WebLogAspect {
         // 打印请求的 IP
         log.info("IP             : {}", request.getRemoteAddr());
         // 打印请求入参
-        log.info("Request Args   : {}", new Gson().toJson(joinPoint.getArgs()));
+
+        log.info("Request Args   : {}", JSONArray.toJSONString(joinPoint.getArgs()));
     }
 
     /**
@@ -90,7 +92,8 @@ public class WebLogAspect {
         Object result = proceedingJoinPoint.proceed();
         log.info("------------------Around-------------------");
         // 打印出参
-        log.info("Response Args  : {}", new Gson().toJson(result));
+//        log.info("Response Args  : {}", new Gson().toJson(result));
+        log.info("Response Args  : {}", JSONObject.toJSONString(result));
         // 执行耗时
         log.info("Time-Consuming : {} ms", stopwatch.elapsed(TimeUnit.MILLISECONDS));
         return result;
