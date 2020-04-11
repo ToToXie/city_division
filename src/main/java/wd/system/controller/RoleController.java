@@ -1,7 +1,7 @@
 package wd.system.controller;
 
 
-import com.wuwenze.poi.ExcelKit;
+import com.alibaba.excel.EasyExcel;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -73,10 +73,12 @@ public class RoleController extends BaseController {
 
     @GetMapping("excel")
     @RequiresPermissions("role:export")
-    @ControllerEndpoint(exceptionMessage = "导出Excel失败")
+//    @ControllerEndpoint(exceptionMessage = "导出Excel失败")
     public void export(QueryRequest queryRequest, Role role, HttpServletResponse response) throws FebsException {
         List<Role> roles = this.roleService.findRoles(role, queryRequest).getRecords();
-        ExcelKit.$Export(Role.class, response).downXlsx(roles, false);
+//        ExcelKit.$Export(Role.class, response).downXlsx(roles, false);
+        String fileName = "simpleWrite" + System.currentTimeMillis() + ".xlsx";
+        EasyExcel.write(fileName, Role.class).sheet("模板").doWrite(roles);
     }
 }
 

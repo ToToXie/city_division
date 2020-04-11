@@ -1,5 +1,7 @@
 package wd.system.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -11,7 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -32,23 +34,30 @@ public class Role implements Serializable {
 
     @ApiModelProperty(value = "角色ID")
     @TableId(value = "ROLE_ID", type = IdType.AUTO)
+    @ExcelProperty("角色ID")
     private Long roleId;
 
     @ApiModelProperty(value = "角色名称")
     @TableField("ROLE_NAME")
+    @ExcelProperty("角色名称")
     private String roleName;
 
     @ApiModelProperty(value = "角色描述")
     @TableField("REMARK")
+    @ExcelProperty("角色描述")
     private String remark;
 
     @ApiModelProperty(value = "创建时间")
     @TableField("CREATE_TIME")
-    private LocalDateTime createTime;
+    @ExcelProperty(value = "创建时间")
+    @DateTimeFormat("yyyy年MM月dd日HH时mm分ss秒")
+    private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
     @TableField("MODIFY_TIME")
-    private LocalDateTime modifyTime;
+    @ExcelProperty("修改时间")
+    @DateTimeFormat("yyyy年MM月dd日HH时mm分ss秒")
+    private Date modifyTime;
     /**
      * 角色对应的菜单（按钮） id
      */

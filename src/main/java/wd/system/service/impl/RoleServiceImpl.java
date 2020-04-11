@@ -19,9 +19,9 @@ import wd.system.service.IRoleMenuService;
 import wd.system.service.IRoleService;
 import wd.system.service.IUserRoleService;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -70,7 +70,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
 //    @Transactional(rollbackFor = Exception.class)
     public void createRole(Role role) {
-        role.setCreateTime(LocalDateTime.now());
+        role.setCreateTime(new Date());
         this.baseMapper.insert(role);
         this.saveRoleMenus(role);
     }
@@ -78,7 +78,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     @Override
 //    @Transactional(rollbackFor = Exception.class)
     public void updateRole(Role role) {
-        role.setModifyTime(LocalDateTime.now());
+        role.setModifyTime(new Date());
         this.updateById(role);
         List<String> roleIdList = new ArrayList<>();
         roleIdList.add(String.valueOf(role.getRoleId()));
