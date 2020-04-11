@@ -4,6 +4,7 @@ package wd.city_division.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,8 +45,9 @@ public class CityController {
         return new FebsResponse().success().message("数据插入完成");
     }
     @GetMapping("/code")
-    @ApiOperation("根据编码查询下级地区")
+    @ApiOperation("根据编码查询下级地区,权限")
     @WebLog(description = "根据编码查询下级地区")
+    @RequiresPermissions("city:view")
     public FebsResponse getByCode(@RequestParam(defaultValue = "-1") String code){
         List<City> cities = cityService.listByCode(code);
         return new FebsResponse().success().message("查询完成").data(cities);

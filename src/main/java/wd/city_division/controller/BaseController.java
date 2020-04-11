@@ -5,7 +5,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
-import wd.city_division.entity.User;
+import wd.system.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;

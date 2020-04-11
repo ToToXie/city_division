@@ -123,12 +123,21 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.4.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.wuwenze</groupId>
+            <artifactId>ExcelKit</artifactId>
+            <version>2.0.72</version>
+        </dependency>
         <!--<dependency>-->
             <!--<groupId>com.google.guava</groupId>-->
             <!--<artifactId>guava</artifactId>-->
             <!--<version>RELEASE</version>-->
         <!--</dependency>-->
-
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
 
     </dependencies>
 

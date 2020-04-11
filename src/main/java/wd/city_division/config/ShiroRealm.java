@@ -9,12 +9,12 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import wd.city_division.entity.Menu;
-import wd.city_division.entity.Role;
-import wd.city_division.entity.User;
-import wd.city_division.service.IMenuService;
-import wd.city_division.service.IRoleService;
-import wd.city_division.service.IUserService;
+import wd.system.entity.Menu;
+import wd.system.entity.Role;
+import wd.system.entity.User;
+import wd.system.service.IMenuService;
+import wd.system.service.IRoleService;
+import wd.system.service.IUserService;
 
 import java.util.List;
 import java.util.Set;
@@ -27,9 +27,11 @@ import java.util.stream.Collectors;
  */
 @Component
 public class ShiroRealm extends AuthorizingRealm {
-
+    //    @Resource
     private IUserService userService;
+    //    @Resource
     private IRoleService roleService;
+    //    @Resource
     private IMenuService menuService;
 
     @Autowired

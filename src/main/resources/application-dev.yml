@@ -21,14 +21,14 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     cache-enabled: true
-  mapper-locations: classpath*:/mapper/city_division/*.xml
+  mapper-locations: classpath:/mapper/*/*.xml
   global-config:
     db-config:
       field-strategy: not_empty
       id-type: auto
       db-type: mysql
     banner: false
-  type-aliases-package: wd.city_division.entity
+  type-aliases-package: wd.*.entity
   #mybatis:
   #  configuration:
   #    cache-enabled: true
