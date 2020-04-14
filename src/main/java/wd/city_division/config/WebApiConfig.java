@@ -1,8 +1,10 @@
 package wd.city_division.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import wd.city_division.interceptor.TimeInterceptor;
 
 @Configuration
 public class WebApiConfig extends WebMvcConfigurationSupport {
@@ -16,5 +18,11 @@ public class WebApiConfig extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
         super.addResourceHandlers(registry);
+    }
+
+    @Override
+    protected void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TimeInterceptor()).addPathPatterns("/*");
+        super.addInterceptors(registry);
     }
 }
