@@ -21,16 +21,20 @@ public class TimeInterceptor extends HandlerInterceptorAdapter {
         System.out.println("----------------time interceptor preHandle---------");
         System.out.println("----------------time interceptor preHandle---------");
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
-        // 获取处理当前请求的 handler 信息
-        System.out.println("handler 类：" + handlerMethod.getBeanType().getName());
-        System.out.println("handler 方法：" + handlerMethod.getMethod().getName());
+        try {
+            HandlerMethod handlerMethod = (HandlerMethod) handler;
+            // 获取处理当前请求的 handler 信息
+            System.out.println("handler 类：" + handlerMethod.getBeanType().getName());
+            System.out.println("handler 方法：" + handlerMethod.getMethod().getName());
 
-        MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
-        for (MethodParameter methodParameter : methodParameters) {
-            String parameterName = methodParameter.getParameterName();
-            // 只能获取参数的名称，不能获取到参数的值
-            System.out.println("parameterName: " + parameterName);
+            MethodParameter[] methodParameters = handlerMethod.getMethodParameters();
+            for (MethodParameter methodParameter : methodParameters) {
+                String parameterName = methodParameter.getParameterName();
+                // 只能获取参数的名称，不能获取到参数的值
+                System.out.println("parameterName: " + parameterName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // 把当前时间放入 threadLocal
